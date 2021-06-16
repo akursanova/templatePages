@@ -1,0 +1,35 @@
+{
+  "name": "templatepages",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/node": "^7.14.5",
+    "@babel/preset-env": "^7.14.5",
+    "@babel/register": "^7.14.5",
+    "chai": "^4.3.4",
+    "eslint": "^7.28.0",
+    "playwright": "^1.12.2"
+  },
+  "devDependencies": {
+    "mocha": "^9.0.0"
+  },
+  "scripts": {
+    "test": "mocha specs/*.spec.js -timeout 50000 --require @babel/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akursanova/templatePages.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akursanova/templatePages/issues"
+  },
+  "homepage": "https://github.com/akursanova/templatePages#readme"
+}
