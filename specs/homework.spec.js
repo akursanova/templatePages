@@ -1,5 +1,6 @@
 import chai from 'chai';
-import {goto, run, stop} from '../lib/browser';
+import {goto, run, stop} from '../framework/lib/browser';
+import {app} from '../framework/pages/index';
 
 const {expect} = chai;
 describe('demo suite', () => {
@@ -11,15 +12,34 @@ describe('demo suite', () => {
   afterEach(async () => {
     await stop();
   })
-  it('demo test', async() => {
-    await page.fill('#login-form > div:nth-child(2) > input[type=text]', 'demo');
-    await page.click('#login-form > div:nth-child(3) > input[type=password]');
-    await page.fill('#login-form > div:nth-child(3) > input[type=password]', 'demo');
-    await page.click('#login-button');
-    await page.click('#login-otp-button');
-
-    const message = ('#user-greeting');
-    const messageText = await page.textContent(message);
-    expect(messageText).to.have.string('Hello World!');
+  it('just login', async() => {
+    await app().LoginPage().login(page);
+    const greetingText = await app().MainPage().getGreetingText(page);
+    expect(greetingText).to.have.string('Hello World!');
+  })
+  it ('go to messages', async() => {
+    await app().LoginPage().login(page);
+    await app().MainPage().gotoMessages(page);
+    const messagesHeader = await app().MessagesPage().getHeader(page);
+    expect(messagesHeader).to.have.string('Messages');
+  })
+  it ('logout', async() => {
+    await app().LoginPage().login(page);
+    await app().MainPage().logout(page);
+    let isUsernameField = await app().LoginPage().isUsername(page);
+    expect(isUsernameField).to.be.true;
+  })
+  it ('check contacts opening', async() => {
+    await app().LoginPage().login(page);
+    await app().MainPage().gotoContacts(page);
+    let contactsModal = await app().MainPage().isContacts(page);
+    expect(contactsModal).to.be.true;
+  })
+  it ('send message', async() => {
+    await app().LoginPage().login(page);
+    await app().MainPage().gotoMessages(page);
+    await app().MessagesPage().sendMessage(page);
+    let isNewMessage = await app().MessagesPage().isNewMessageVisible(page);
+    expect(isNewMessage).to.be.true;
   })
 })

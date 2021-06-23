@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "directories": {
-    "lib": "lib"
+    "lib": "framework/lib"
   },
   "dependencies": {
     "@babel/cli": "^7.14.5",
