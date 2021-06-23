@@ -13,13 +13,13 @@ const MessagesPage = function () {
   this.sendMessage = async function (page) {
     await page.click(newMessageButton);
     await page.selectOption(topics, 'DEPOSIT');
-    await page.fill(messageField, 'ewewewew')
-    await page.click(sendButton)
+    await page.fill(messageField, 'ewewewew');
+    await page.click(sendButton);
 
-    let frames = await page.frames()
-    const frame = frames.find(f => f.url() === 'https://idemo.bspb.ru/auth/confirm')
-    await frame.waitForSelector(confirm)
-    await frame.click(confirm)
+    let frames = await page.frames();
+    const frame = frames.find(f => f.url() === 'https://idemo.bspb.ru/auth/confirm');
+    await frame.waitForSelector(confirm);
+    await frame.click(confirm);
   }
 
   this.isNewMessageVisible = async function (page) {
